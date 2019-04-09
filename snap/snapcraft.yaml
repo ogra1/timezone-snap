@@ -9,10 +9,11 @@ grade: stable
 confinement: strict
 
 apps:
-  command: geoip.sh
-  daemon: simple
-  plugs:
-    - timezone-control
+  geoip:
+    command: geoip.sh
+    daemon: simple
+    plugs:
+      - timezone-control
 
 parts:
   geoip-script:
