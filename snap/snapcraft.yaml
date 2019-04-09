@@ -1,0 +1,24 @@
+name: geoip-lookup
+version: '0.1'
+summary: Set the timezone on boot performing a geoip.ubuntu.com looup
+description: |
+  To set the default timezone of an appliance image this snap performs a
+  geoip lookup on geoip.ubuntu.com and sets the time zone on every boot.
+
+grade: stable
+confinement: strict
+
+apps:
+  command: geoip.sh
+  daemon: simple
+  plugs:
+    - timezone-control
+
+parts:
+  geoip-script:
+    source: .
+    plugin: nil
+    override-build: |
+      cp geoip.sh $SNAPCRAFT_PART_INSTALL
+    stage-packages:
+      - wget
